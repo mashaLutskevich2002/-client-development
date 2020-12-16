@@ -80,8 +80,8 @@ function moveFunc() {
     let x = work.offsetWidth / 2;
     let y = work.offsetHeight / 2 + 20;
 
-    let x1 = work.offsetWidth / 2;
-    let y1 = work.offsetHeight / 2 + 20;
+    let x1 = work.offsetWidth / 2 + 10;
+    let y1 = work.offsetHeight / 2 + 50;
     function moveCircles() {
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext("2d");
@@ -89,9 +89,11 @@ function moveFunc() {
 
         let ctx1 = canvas.getContext("2d");
         ctx1.clearRect(0, 0, canvas.width, canvas.height);
-       
 
-        if (x <= 10 || y <= 60 || x >= work.offsetWidth - 10 || y >= work.offsetHeight - 20) {
+        
+
+        if (Math.abs(x - x1) <= 9|| Math.abs(y - y1) <= 9 || x >= work.offsetWidth - 10 || y >= work.offsetHeight - 20) {
+        
             clearInterval(interval);
             drawball(ctx, x, y);
             drawball1(ctx1, x + 40, y);
@@ -105,6 +107,7 @@ function moveFunc() {
         } else {
             if (distance % 4 === 0) {
                 x = x - distance;
+                
                 drawball(ctx, x, y);
                 writeMessage("circle is on right top square ");
             } else if (distance % 4 === 1) {
@@ -116,26 +119,26 @@ function moveFunc() {
                 drawball(ctx, x, y);
                 writeMessage("circle is on left bottom square ");
             } else if (distance % 4 === 3) {
-                y = y - distance;
+                y = y + distance;
                 drawball(ctx, x, y);
                 writeMessage("circle is on right bottom square ");
             }
-
+            
             if (distance % 4 === 0) {
-                x = x - distance;
-                drawball1(ctx1, x, y);
+                x1 = x1 - distance;
+                drawball1(ctx1, x1, y1);
                 writeMessage("circle1 is on right top square ");
             } else if (distance % 4 === 1) {
-                y = y + distance;
-                drawball1(ctx1, x, y);
+                y1 = y1 + distance;
+                drawball1(ctx1, x1, y1);
                 writeMessage("circle1 is on left top square ");
             } else if (distance % 4 === 2) {
-                x = x + distance;
-                drawball1(ctx1, x, y);
+                x1 = x1 + distance;
+                drawball1(ctx1, x1, y1);
                 writeMessage("circle1 is on left bottom square ");
             } else if (distance % 4 === 3) {
-                y = y - distance;
-                drawball1(ctx1, x, y);
+                y1 = y1 - distance;
+                drawball1(ctx1, x1, y1);
                 writeMessage("circle1 is on right bottom square ");
             }
             distance++;
